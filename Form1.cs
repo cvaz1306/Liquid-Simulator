@@ -18,9 +18,8 @@ namespace RRR3Liquid
         Bitmap bitmap1;
         Bitmap bitmap2;
         Brush brush = new SolidBrush(Color.FromKnownColor(KnownColor.Red));
-        Vector2 velocity;
-        Vector2 gravity;
-        Vector2 pos;
+        particle p;
+        particle p1;
         public Form1()
         {
             InitializeComponent();
@@ -28,36 +27,21 @@ namespace RRR3Liquid
             this.timer1.Start();
             bitmap1=new Bitmap(this.Width, this.Height);
             bitmap2=new Bitmap(this.Width, this.Height);
-            gravity = new Vector2(0, -.98f);
-            pos = Vector2.Zero;
-            velocity= Vector2.Zero + new Vector2(-0f, 10);
-        }
-        void physics()
-        {
-            velocity += gravity;
-            velocity.Y /= 1.1f;
-            float dampingFactor = 0.98f; // You can adjust this value as needed
-            velocity *= dampingFactor;
-            if ((int)(-pos.Y + 75) > 489)
-            {
-                Console.WriteLine("H");
-                velocity.Y = (-(velocity.Y) *2.5f)-3; // Invert the Y component of velocity
-                //pos.Y = -this.Height + 50; // Reset the ball's position to the correct height
-            }
-            pos += velocity;
-            frameCT++;
+            p = new particle(new Vector2(0, -.981f), new Vector2((float)Width / 2, 0), Vector2.Zero);
+            p1 = new particle(new Vector2(0, -.981f), new Vector2((float)Width / 2+25, -25), new Vector2(1,0));
 
-
-            Console.WriteLine(-pos.Y + 50 + ";" + this.Height);
         }
         void Draw(Graphics g)
         {
-            g.FillEllipse(brush, (this.Width / 2) + pos.X, -pos.Y + 50, 25, 25);
+            p.physics();
+            p.Draw(g, brush);
+            p1.physics();
+            p1.Draw(g, brush);
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
-            
-            physics();
+            frameCT++;
+            //physics();
             if (frameCT % 2 == 0)
             {
                 using (Graphics g = Graphics.FromImage(bitmap1))
@@ -66,7 +50,7 @@ namespace RRR3Liquid
                 }
                 using (Graphics g = Graphics.FromImage(bitmap2))
                 {
-                    g.Clear(Color.White);
+                    g.Clear(Color.Black);
                 }
             }
             else
@@ -77,7 +61,7 @@ namespace RRR3Liquid
                 }
                 using (Graphics g = Graphics.FromImage(bitmap1))
                 {
-                    g.Clear(Color.White);
+                    g.Clear(Color.Black);
                 }
             }
             using (Graphics g=CreateGraphics())
