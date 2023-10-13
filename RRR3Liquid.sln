@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33723.286
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RRR3Liquid", "RRR3Liquid.csproj", "{A67CE7CD-3C8E-4F92-A54A-DC0380E660BD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A67CE7CD-3C8E-4F92-A54A-DC0380E660BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A67CE7CD-3C8E-4F92-A54A-DC0380E660BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A67CE7CD-3C8E-4F92-A54A-DC0380E660BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A67CE7CD-3C8E-4F92-A54A-DC0380E660BD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {25EC2A1F-7D5B-492D-B626-954B9300B400}
+	EndGlobalSection
+EndGlobal
