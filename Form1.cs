@@ -18,25 +18,30 @@ namespace RRR3Liquid
         Bitmap bitmap1;
         Bitmap bitmap2;
         Brush brush = new SolidBrush(Color.FromKnownColor(KnownColor.Red));
-        particle p;
-        particle p1;
+        List<particle> particles=new List<particle>();
         public Form1()
         {
             InitializeComponent();
             this.timer1.Interval = 10;
             this.timer1.Start();
-            bitmap1=new Bitmap(this.Width, this.Height);
+            this.timer1.Interval = 10;
+            this.timer1.Start();
+            bitmap1 =new Bitmap(this.Width, this.Height);
             bitmap2=new Bitmap(this.Width, this.Height);
-            p = new particle(new Vector2(0, -.981f), new Vector2((float)Width / 2, 0), Vector2.Zero);
-            p1 = new particle(new Vector2(0, -.981f), new Vector2((float)Width / 2+25, -25), new Vector2(1,0));
+            
+            particles.Add(new particle(new Vector2(0, -.981f), new Vector2((float)Width / 2, 0), Vector2.Zero));
+            particles.Add(new particle(new Vector2(0, -1f), new Vector2((float)Width / 2+25, -25), new Vector2(1,0)));
+            particles.Add(new particle(new Vector2(0, -.5f), new Vector2((float)Width / 2 + 25, -25), new Vector2(1, 0)));
+            particles.Add(new particle(new Vector2(0, -.6f), new Vector2((float)Width / 2 + 25, -25), new Vector2(1, 0)));
 
         }
         void Draw(Graphics g)
         {
-            p.physics();
-            p.Draw(g, brush);
-            p1.physics();
-            p1.Draw(g, brush);
+            foreach(particle p in particles)
+            {
+                p.physics();
+                p.Draw(g, brush);
+            }
         }
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -75,6 +80,11 @@ namespace RRR3Liquid
                     g.DrawImage(bitmap2, 0, 0);
                 }
             }
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            
         }
     }
 }
