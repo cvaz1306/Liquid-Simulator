@@ -24,8 +24,8 @@ namespace RRR3Liquid
             InitializeComponent();
             this.timer1.Interval = 10;
             this.timer1.Start();
-            this.timer1.Interval = 10;
-            this.timer1.Start();
+            this.timer2.Interval = 10;
+            this.timer2.Start();
             bitmap1 =new Bitmap(this.Width, this.Height);
             bitmap2=new Bitmap(this.Width, this.Height);
             
@@ -84,7 +84,17 @@ namespace RRR3Liquid
 
         private void timer2_Tick(object sender, EventArgs e)
         {
-            
+            foreach(particle particle in particles)
+            {
+                foreach(particle p in particles)
+                {
+                    if((particle.pos-p.pos).Length() < 30f)
+                    {
+                        Vector2 l = (particle.pos - p.pos);
+                        p.velocity -= l/100*l.Length();
+                    }
+                }
+            }
         }
     }
 }

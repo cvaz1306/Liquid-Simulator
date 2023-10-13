@@ -10,9 +10,9 @@ namespace RRR3Liquid
 {
     class particle
     {
-        Vector2 velocity;
+        public Vector2 velocity;
         Vector2 gravity;
-        Vector2 pos;
+        public Vector2 pos;
         public static int height;
         public static int width;
         public particle(Vector2 gravityX, Vector2 startpos, Vector2 initialVelocity)
