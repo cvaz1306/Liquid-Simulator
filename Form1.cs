@@ -14,6 +14,7 @@ namespace RRR3Liquid
 
     public partial class Form1 : Form
     {
+        float pressure = .2f;
         int frameCT=0;
         Bitmap bitmap1;
         Bitmap bitmap2;
@@ -21,25 +22,35 @@ namespace RRR3Liquid
         List<particle> particles=new List<particle>();
         public Form1()
         {
+            
             InitializeComponent();
             this.timer1.Interval = 10;
             this.timer1.Start();
             this.timer2.Interval = 10;
             this.timer2.Start();
-            bitmap1 =new Bitmap(this.Width, this.Height);
-            bitmap2=new Bitmap(this.Width, this.Height);
+            particle.height = this.Height-100;
+            particle.width = this.Width-100;
+            bitmap1 =new Bitmap(particle.width, particle.height);
+            bitmap2=new Bitmap(particle.width, particle.height);
+            SquareRootWithRemainderResult sr = SquareRootCalculator.CalculateSquareRootWithRemainder(100);
             
-            particles.Add(new particle(new Vector2(0, -.981f), new Vector2((float)Width / 2, 0), Vector2.Zero));
-            particles.Add(new particle(new Vector2(0, -1f), new Vector2((float)Width / 2+25, -25), new Vector2(1,0)));
-            particles.Add(new particle(new Vector2(0, -.5f), new Vector2((float)Width / 2 + 25, -25), new Vector2(1, 0)));
-            particles.Add(new particle(new Vector2(0, -.6f), new Vector2((float)Width / 2 + 25, -25), new Vector2(1, 0)));
+            for (int i=0; i<sr.SquareRoot; i++)
+            {
+                for (int j = 0; j < sr.SquareRoot; j++)
+                {
+
+                    particles.Add(new particle(new Vector2(-0, -1.3f), new Vector2((float)(this.Width / 8) + (30 * i) - 300, (float)(this.Width / 8)+(30*j)-300/*(30 * (((i % 100)%10) - 5))+60*/), new Vector2(13, 10)));
+
+                }
+
+            }
 
         }
         void Draw(Graphics g)
         {
             foreach(particle p in particles)
             {
-                p.physics();
+                p.Physics();
                 p.Draw(g, brush);
             }
         }
@@ -91,10 +102,11 @@ namespace RRR3Liquid
                     if((particle.pos-p.pos).Length() < 30f)
                     {
                         Vector2 l = (particle.pos - p.pos);
-                        p.velocity -= l/100*l.Length();
+                        p.velocity -= (l / 100 * l.Length())*pressure;
                     }
                 }
             }
+            GC.Collect();
         }
     }
 }
